@@ -1,0 +1,21 @@
+clipcap:
+  language_model:
+    name: bigscience/bloom-560m
+    output_dim: 1024
+  vision_model:
+    name: VIT-B/32
+    image_size: 224
+    output_dim: 512
+  adapter:
+    type: mlp
+    hl1_dim: 64
+    hl2_dim: 32
+data:
+  data_dir: data/coco/
+  name: coco
+experiment_name: ${oc.env:EXPERIMENT_NAME}
+project_name: clipcap
+language: en
+epochs: 10
+batch_size: 4
+lr: 2.0e-05

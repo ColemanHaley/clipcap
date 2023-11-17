@@ -1,8 +1,7 @@
 defaults:
-  - clipcap: gpt
+  - clipcap: default
   - data: coco
   - _self_
-
 experiment_name: ${oc.env:EXPERIMENT_NAME}
 project_name: clipcap
 language: en

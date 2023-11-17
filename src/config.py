@@ -5,10 +5,8 @@ import hydra
 from huggingface_hub import model_info
 from huggingface_hub.utils import RepositoryNotFoundError
 from omegaconf import MISSING, DictConfig, OmegaConf
-from pydantic import BaseModel, DirectoryPath, Field, validator
+from pydantic import BaseModel, DirectoryPath, Field, validator, PositiveInt
 from typing_extensions import Annotated
-
-PositiveInt = Annotated[int, Field(gt=0)]
 
 
 class VisionModelConfig(BaseModel):
@@ -19,7 +17,7 @@ class VisionModelConfig(BaseModel):
 
 class LanguageModelConfig(BaseModel):
     name: str
-    output_dim: int = 1024
+    output_dim: PositiveInt
 
     @validator("name")
     def must_be_huggingface_model(cls, v):
@@ -69,10 +67,14 @@ class ExperimentConfig(BaseModel):
     epochs: PositiveInt
     language: Language
     lr: Annotated[float, Field(gt=0, lt=1)]
+    project_name: str
+    experiment_name: str
+    crimes: str
 
 
 @hydra.main(version_base=None, config_path="../config", config_name="config")
 def main(cfg: DictConfig) -> None:
+    print(cfg.experiment_name)
     print(OmegaConf.to_yaml(cfg))
 
     OmegaConf.resolve(cfg)
