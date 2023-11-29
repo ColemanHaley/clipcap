@@ -1,0 +1,13 @@
+gdown
+hydra-core
+lightning
+torchvision
+clip
+evaluate
+wandb
+transformers
+scikit-image
+git+https://github.com/openai/CLIP.git
+nltk
+rouge_score
+absl-py
